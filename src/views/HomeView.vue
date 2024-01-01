@@ -1,23 +1,84 @@
 <template>
   <div class="home-wrapper">
-    <el-row>
-      <el-col :span="24">
-        <el-button type="primary" siz>Primary</el-button>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col :span="12">
-        <el-button type="primary">Primary</el-button>
-      </el-col>
-      <el-col :span="12">
-        <el-button type="primary">Primary</el-button>
-      </el-col>
-    </el-row>
+    <div class="select-subject">
+      <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props"
+          @change="handleChange"
+      />
+      <el-input v-model="input" placeholder="请输入学科名" clearable style="width: 20%"/>
+      <el-button @click="getArticleList">测试</el-button>
+    </div>
+    <div class="subject-list">
+      <el-space wrap :size="30">
+        <el-card v-for="item in 9" :key="item" class="box-card" style="width: 250px">
+          <template #header>
+            <div class="card-header">
+              <span>Card name</span>
+              <el-button class="button" text>Operation button</el-button>
+            </div>
+          </template>
+        </el-card>
+      </el-space>
+    </div>
   </div>
 
 </template>
 
-<script setup>
+<script setup lang="ts">
+import {ref} from 'vue'
+import {onMounted} from "vue";
+import {getArticleTitleList} from "@/utils/request/api";
+
+const value = ref([])
+const input = ref('计算机科学与技术')
+const articleInfo = ref();
+
+const props = {
+  expandTrigger: 'hover' as const,
+}
+
+const options = [
+  {
+    value: '工科',
+    label: '工科',
+    children: [
+      {
+        value: '计算机科学与技术',
+        label: '计算机科学与技术',
+        children: [
+          {
+            value: '计算机科学与技术',
+            label: '计算机科学与技术',
+          },
+          {
+            value: '软件工程',
+            label: '软件工程'
+          }
+        ],
+      }
+    ]
+  }
+]
+
+const handleChange = (value) => {
+  console.log(value)
+}
+
+onMounted(() => {
+  console.log("1111111111111111111111111111111111111111");
+})
+
+function getArticleList() {
+  console.log("2222222222222222222222222222222222222222");
+  getArticleTitleList().then((res) => {
+    console.log("3333333333333333333333333333333333333333")
+  }).catch((err) => {
+    console.log("444444444444444444444444444444444444444444")
+    return false;
+  })
+}
 
 </script>
 
@@ -25,5 +86,20 @@
 .home-wrapper {
   /*display: inline-block;*/
   /*width: 70%;*/
+}
+
+.select-subject {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.subject-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 300px;
+  padding-right: 300px;
 }
 </style>

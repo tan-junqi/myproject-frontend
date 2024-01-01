@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@vavt/md-editor-extension": "^3.0.0",
+    "axios": "^1.6.3",
     "element-plus": "^2.4.4",
     "md-editor-v3": "^4.9.0",
     "vue": "^3.3.11",

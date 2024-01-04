@@ -6,9 +6,9 @@
     </div>
     <div class="subject-list">
       <el-space wrap :size="30">
-        <el-card v-for="item in 9" :key="item" class="box-card" style="width: 250px">
+        <el-card v-for="(item, id) in articleInfo" :key="id" class="box-card" style="width: 250px">
           <a class="item-top">
-            <!--            <h4>{{ item.articleTitle }}</h4>-->
+            <h4>{{ item.articleTitle }}</h4>
           </a>
         </el-card>
       </el-space>
@@ -18,12 +18,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { reactive } from 'vue'
 import { onMounted } from 'vue'
 import { getArticleTitleList } from '@/utils/request/api'
 
 const value = ref([])
 const input = ref('计算机科学与技术')
-const articleInfo = ref()
+const articleInfo = reactive([]) as any[]
 
 const props = {
   expandTrigger: 'hover' as const
@@ -60,10 +61,9 @@ onMounted(() => {
   console.log('数据加载')
   getArticleTitleList()
     .then((response) => {
-      articleInfo.value = response.data
-      console.log(articleInfo)
-      console.log('------------------')
-      console.log(articleInfo.value[0].articleTitle)
+      response.data.forEach((s: any) => {
+        articleInfo.push(s)
+      })
     })
     .catch((err) => {
       return false

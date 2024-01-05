@@ -7,7 +7,7 @@
     <div class="subject-list">
       <el-space wrap :size="30">
         <el-card v-for="(item, id) in articleInfo" :key="id" class="box-card" style="width: 250px">
-          <a class="item-top">
+          <a class="item-top" @click="changeToArticle(id)">
             <h4>{{ item.articleTitle }}</h4>
           </a>
         </el-card>
@@ -17,9 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { reactive } from 'vue'
-import { onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import router from '@/router'
 import { getArticleTitleList } from '@/utils/request/api'
 
 const value = ref([])
@@ -57,6 +56,10 @@ const handleChange = (value) => {
   console.log(value)
 }
 
+const changeToArticle = (id: number) => {
+  router.push({ name: 'article', params: { id: id } })
+}
+
 onMounted(() => {
   console.log('数据加载')
   getArticleTitleList()
@@ -69,8 +72,6 @@ onMounted(() => {
       return false
     })
 })
-
-function getArticleList() {}
 </script>
 
 <style>

@@ -1,23 +1,23 @@
 <template>
   <div class="header-wrapper">
     <el-menu
-      router
-      :default-active="this.$route.path"
-      class="menu-wrapper"
-      mode="horizontal"
-      @select="handleSelect"
+        router
+        :default-active="this.$route.path"
+        class="menu-wrapper"
+        mode="horizontal"
+        @select="handleSelect"
     >
-      <el-menu-item @click="handleChange('home')">学习</el-menu-item>
-      <el-menu-item>考研</el-menu-item>
-      <el-menu-item>工作</el-menu-item>
-      <el-menu-item>讨论</el-menu-item>
-      <el-menu-item @click="handleChange('editPaper')">创作</el-menu-item>
+      <el-menu-item index="/">学习</el-menu-item>
+      <el-menu-item index="2">考研</el-menu-item>
+      <el-menu-item index="3">工作</el-menu-item>
+      <el-menu-item index="/article">讨论</el-menu-item>
+      <el-menu-item index="/editPaper">创作</el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
 import router from '@/router'
 
 const activeIndex = ref('1')
@@ -27,7 +27,7 @@ const handleSelect = (key: string, keyPath: string[]) => {
 }
 
 const handleChange = (name: string) => {
-  router.push({ name: name })
+  router.push({name: name})
 }
 </script>
 

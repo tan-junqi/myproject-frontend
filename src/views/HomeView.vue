@@ -1,8 +1,8 @@
 <template>
   <div class="home-wrapper">
     <div class="select-subject">
-      <el-cascader v-model="value" :options="options" :props="props" @change="handleChange" />
-      <el-input v-model="input" placeholder="请输入学科名" clearable style="width: 20%" />
+      <el-cascader v-model="value" :options="options" :props="props" @change="handleChange"/>
+      <el-input v-model="input" placeholder="请输入学科名" clearable style="width: 20%"/>
     </div>
     <div class="subject-list">
       <el-space wrap :size="30">
@@ -72,6 +72,8 @@ onMounted(() => {
       return false
     })
 })
+
+function getArticleList() {}
 </script>
 
 <style>

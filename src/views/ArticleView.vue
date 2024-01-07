@@ -1,16 +1,13 @@
 <template>
-  <article-detail :id="id"></article-detail>
+  <article-detail></article-detail>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import {ref, onMounted} from 'vue'
+import {useRoute} from "vue-router";
 import ArticleDetail from '../components/ArticleDetail.vue'
 
-const id = ref()
-
 onMounted(() => {
-  id.value = this.$route.params.id
-  console.log(id)
 })
 </script>
 
